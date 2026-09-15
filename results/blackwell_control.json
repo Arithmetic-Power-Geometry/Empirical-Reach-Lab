@@ -1,0 +1,8 @@
+{
+  "dominant_channel": "exact_x",
+  "garbled_channel": "noisy_x",
+  "blackwell_dominates": true,
+  "unresolved_consequential_diameter_exact_x": 1.0,
+  "unresolved_consequential_diameter_noisy_x": 1.0,
+  "interpretation": "Blackwell improvement within the x-sensitive direction does not resolve the z-defined consequential distinction."
+}
