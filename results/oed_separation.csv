@@ -1,0 +1,4 @@
+experiment,model_information_bits,unresolved_diameter_after_addition,consequential_reach_gain
+exact_x,1.0,1.0,0.0
+noisy_x,less_than_1,1.0,0.0
+exact_z,0.0,0.0,1.0
