@@ -1,0 +1,11 @@
+{
+  "artifact": "Empirical Reach Lab",
+  "result_files": {
+    "Table 1": "results/oed_separation.csv",
+    "Table 2": "results/statistical_evidence_cost.csv",
+    "Figure 2": "results/statistical_evidence_cost.csv",
+    "Table 3": "results/continuous_synthesis.csv",
+    "Exact finite-search result": "results/exact_search_results.json"
+  },
+  "notes": "Synthetic deterministic benchmarks. Values correspond to the manuscript and executable experiment definitions on the default branch. No external empirical dataset is used."
+}
