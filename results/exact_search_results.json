@@ -1,0 +1,13 @@
+{
+  "small_instance": {
+    "selected_primitives": ["hidden_a", "hidden_b"],
+    "cost": 0.36,
+    "global_probe_cost": 2.0,
+    "cross_check": "exhaustive_enumeration_agrees"
+  },
+  "distractor_benchmark": {
+    "maximum_x_only_distractors": 250,
+    "preserved_optimum": ["hidden_a", "hidden_b"],
+    "preserved_cost": 0.36
+  }
+}
