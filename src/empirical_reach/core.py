@@ -7,18 +7,14 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from itertools import product
-from typing import Iterable, Sequence
+from typing import Sequence
 
 import numpy as np
 
 
 @dataclass(frozen=True)
 class Experiment:
-    """A finite stochastic experiment/channel P(y|w).
-
-    `channel` has shape (n_worlds, n_outputs). Rows must sum to one.
-    """
-
+    """A finite stochastic experiment/channel P(y|w)."""
     name: str
     channel: np.ndarray
 
@@ -34,7 +30,11 @@ class Experiment:
 
 
 def _signature(experiments: Sequence[Experiment], w: int, decimals: int = 12) -> tuple:
-    return tuple(np.round(e.channel[w], decimals=decimals).tolist() for e in experiments)
+    """Hashable signature of all response laws available for world w."""
+    return tuple(
+        tuple(np.round(e.channel[w], decimals=decimals).tolist())
+        for e in experiments
+    )
 
 
 def empirical_partition(experiments: Sequence[Experiment], n_worlds: int) -> list[tuple[int, ...]]:
@@ -45,10 +45,7 @@ def empirical_partition(experiments: Sequence[Experiment], n_worlds: int) -> lis
     return [tuple(v) for v in groups.values()]
 
 
-def unresolved_diameter(
-    experiments: Sequence[Experiment],
-    outcome: Sequence[float],
-) -> float:
+def unresolved_diameter(experiments: Sequence[Experiment], outcome: Sequence[float]) -> float:
     """Maximum consequential variation hidden inside an empirical class."""
     f = np.asarray(outcome, dtype=float)
     part = empirical_partition(experiments, len(f))
@@ -59,11 +56,7 @@ def unresolved_diameter(
     return diam
 
 
-def reach_gain(
-    experiments: Sequence[Experiment],
-    candidate: Experiment,
-    outcome: Sequence[float],
-) -> float:
+def reach_gain(experiments: Sequence[Experiment], candidate: Experiment, outcome: Sequence[float]) -> float:
     before = unresolved_diameter(experiments, outcome)
     after = unresolved_diameter([*experiments, candidate], outcome)
     return before - after
@@ -86,19 +79,11 @@ def mutual_information(channel: np.ndarray, prior: Sequence[float] | None = None
 
 
 def blackwell_dominates(a: Experiment, b: Experiment, tol: float = 1e-9) -> bool:
-    """Check whether b is a garbling of a for small finite-output channels.
-
-    We solve a simple grid-free feasibility problem for binary-output `a`, and
-    use least squares + simplex checks in the general small case. This is a
-    computational diagnostic, not a replacement for a full LP solver.
-    """
+    """Diagnostic: whether b is representable as a row-stochastic garbling of a."""
     A, B = a.channel, b.channel
-    m, k = A.shape
+    m, _ = A.shape
     if B.shape[0] != m:
         return False
-    l = B.shape[1]
-
-    # Solve A G = B, then test whether G is row-stochastic and non-negative.
     G, *_ = np.linalg.lstsq(A, B, rcond=None)
     if np.max(np.abs(A @ G - B)) > tol:
         return False
