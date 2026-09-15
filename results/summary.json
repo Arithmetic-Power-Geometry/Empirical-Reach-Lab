@@ -1,0 +1,18 @@
+{
+  "minimal_benchmark": {
+    "worlds": [[0,0],[0,1],[1,0],[1,1]],
+    "current_equivalence_classes": [[[0,0],[0,1]],[[1,0],[1,1]]],
+    "unresolved_outcome_diameter": 1.0,
+    "current_composition_resolves_z": false
+  },
+  "oed_separation": {
+    "exact_x_model_information_bits": 1.0,
+    "exact_z_model_information_bits": 0.0,
+    "exact_z_unresolved_diameter_after_addition": 0.0
+  },
+  "exact_search": {
+    "selected": ["hidden_a","hidden_b"],
+    "cost": 0.36,
+    "global_probe_cost": 2.0
+  }
+}
