@@ -1,0 +1,4 @@
+target_error,angle_radians,angle_label,strength,repetitions,per_trial_cost,total_cost
+0.10,1.5707963267948966,pi/2,0.98,13,1.0104,13.1352
+0.05,1.5707963267948966,pi/2,0.99,18,1.0301,18.5418
+0.01,1.5707963267948966,pi/2,1.00,30,1.0500,31.5000
